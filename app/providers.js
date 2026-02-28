@@ -30,12 +30,23 @@ const monadNetwork = {
 };
 
 export default function Providers({ children }) {
+  console.log("AgentPay Debug - ClientID Loaded:", process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID);
+
   return (
     <ThirdwebProvider
       activeChain={monadNetwork}
       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
       supportedWallets={[
-        embeddedWallet(),
+        embeddedWallet({
+          auth: {
+            options: [
+              "email",
+              "google",
+              "apple",
+              "facebook",
+            ],
+          },
+        }),
         metamaskWallet(),
         coinbaseWallet(),
         walletConnect(),
