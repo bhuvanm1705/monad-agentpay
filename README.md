@@ -1,108 +1,63 @@
-# Thirdweb Connect Wallet (Next.js App Router)
+# AgentPay 💸🤖
 
-Developer docs for the Thirdweb wallet connection template built with Next.js App Router.
+**The economic layer for the autonomous AI revolution.**
 
-## Overview
+Decentralized payment infrastructure for autonomous AI agents to transact value securely across the Monad network. 
 
-This project renders a wallet connect UI using Thirdweb React v4 (`ConnectWallet`) and configures supported wallets through `ThirdwebProvider`.
+## 🏆 Project Overview
+AI agents are becoming autonomous economic actors, but lack standardized ways to pay each other for services. Today's payment systems weren't designed for machine-to-machine commerce. 
 
-## Tech Stack
+What if an AI research agent could seamlessly hire specialized AI agents for tasks, compensating them directly with stablecoins on a high-performance blockchain?
 
-- Next.js 13 (App Router)
-- React 18
-- `@thirdweb-dev/react` v4
-- `ethers` v5
+**AgentPay** creates decentralized payment rails specifically designed for AI agent ecosystems:
+- AI language models can request compute resources from rendering agents
+- Data-gathering agents can purchase premium API access from provider agents
+- Trading agents can pay fee splits to strategy-creation agents
 
-## Prerequisites
+No more human intermediaries. No more payment friction. Just **seamless value transfer between intelligent machines**.
 
-- Node.js 18+ recommended
-- npm or yarn
-- A Thirdweb Client ID
+## ⚙️ Tech Stack
+- **Frontend**: Next.js 14, React, TailwindCSS
+- **Web3 Integration**: Thirdweb, Wagmi hooks
+- **Smart Contracts**: Solidity, Hardhat, OpenZeppelin
+- **Blockchain**: Monad Testnet / Mainnet (High throughput, low latency)
 
-## Environment Setup
+## 🚀 Features
+- **Agent Dashboard:** Real-time metrics and live activity feed of agent-to-agent transactions.
+- **Agent Registry:** On-chain deployment of new AI agents specifying their specific capabilities and Cost-Per-Call.
+- **Transactions Explorer:** Monitor the flow of MON tokens between payer and payee agents.
+- **Wallet Constraints:** Set daily global spending limits and per-transaction limits for deployed autonomous agents.
 
-1. Create local env file:
+## 💻 Running the Project Locally
 
+**1. Clone the repository**
 ```bash
-cp .env.example .env.local
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+cd monad
 ```
 
-2. Set this value in `.env.local`:
-
-```bash
-NEXT_PUBLIC_TEMPLATE_CLIENT_ID=your_thirdweb_client_id
-```
-
-Get your client ID from the Thirdweb dashboard.
-
-## Install and Run
-
-Using npm:
-
+**2. Install dependencies**
 ```bash
 npm install
+```
+
+**3. Run the Next.js frontend**
+```bash
 npm run dev
 ```
+Open `http://localhost:3000` in your browser.
 
-Using yarn:
-
+**4. (Optional) Smart Contract Interaction**
+The contracts are located in the `onchain/` directory. 
 ```bash
-yarn
-yarn dev
+cd onchain
+npm install
+npx hardhat compile
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+## 📜 Smart Contract Architecture
+- `AgentRegistry.sol`: Registers an "AI Agent" on-chain with metadata (name, description, capabilities).
+- `AgentPayment.sol`: Escrow and payment contract that routes funds, requiring 402-style payment authentication.
 
-## Project Structure
-
-```text
-app/
-  globals.css          # global styles
-  layout.js            # root layout + metadata + provider mount
-  page.js              # home page (ConnectWallet UI)
-  page.module.css      # page-level styles
-  providers.js         # ThirdwebProvider configuration
-public/
-  favicon.ico
-  github.png
-  thirdweb.svg
-.env.example
-```
-
-## Key Configuration
-
-### Thirdweb Provider
-
-Edit `app/providers.js` to customize:
-
-- `activeChain` (currently `ethereum`)
-- `supportedWallets` list
-- client ID env variable
-
-### Connect Wallet UI
-
-Edit `app/page.js` to customize `ConnectWallet` props (theme, button labels, modal behavior, etc.).
-
-## Build and Production
-
-```bash
-npm run build
-npm run start
-```
-
-## Lint
-
-```bash
-npm run lint
-```
-
-## Notes
-
-- `ConnectWallet` and `ThirdwebProvider` run in client components (`'use client'`).
-- Keep secrets out of source control; only expose public env vars prefixed with `NEXT_PUBLIC_`.
-
-## Useful Links
-
-- Thirdweb React v4 docs: https://portal.thirdweb.com/react/v4
-- ConnectWallet docs: https://portal.thirdweb.com/react/v4/components/ConnectWallet
-- Next.js App Router docs: https://nextjs.org/docs/app
+---
+*Built for the Autonomous Economy.*
