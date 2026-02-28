@@ -1,5 +1,6 @@
 'use client';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   ThirdwebProvider,
   coinbaseWallet,
@@ -12,7 +13,6 @@ import {
   zerionWallet,
 } from '@thirdweb-dev/react';
 
-// Custom Monad Network configuration based on User provided RPCs
 const monadNetwork = {
   chainId: 143,
   rpc: ["https://rpc.monad.xyz", "https://rpc1.monad.xyz"],
@@ -28,25 +28,30 @@ const monadNetwork = {
   name: "Monad Mainnet",
 };
 
+const queryClient = new QueryClient();
+
 export default function Providers({ children }) {
   console.log("AgentPay Debug - ClientID Loaded:", process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID);
 
   return (
-    <ThirdwebProvider
-      activeChain={monadNetwork}
-      clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
-      supportedWallets={[
-        metamaskWallet(),
-        coinbaseWallet(),
-        walletConnect(),
-        rainbowWallet(),
-        zerionWallet(),
-        trustWallet(),
-        phantomWallet(),
-        localWallet(),
-      ]}
-    >
-      {children}
-    </ThirdwebProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThirdwebProvider
+        queryClient={queryClient}
+        activeChain={monadNetwork}
+        clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
+        supportedWallets={[
+          metamaskWallet(),
+          coinbaseWallet(),
+          walletConnect(),
+          rainbowWallet(),
+          zerionWallet(),
+          trustWallet(),
+          phantomWallet(),
+          localWallet(),
+        ]}
+      >
+        {children}
+      </ThirdwebProvider>
+    </QueryClientProvider>
   );
 }
