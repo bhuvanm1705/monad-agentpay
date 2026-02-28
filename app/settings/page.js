@@ -1,11 +1,22 @@
+'use client';
+
 import { Shield, Bell, Wallet, Key } from 'lucide-react';
+import { useAddress, useBalance } from '@thirdweb-dev/react';
 
 export default function Settings() {
+    const address = useAddress();
+    const { data: balance, isLoading } = useBalance();
+
     return (
         <div className="space-y-6 animate-in fade-in duration-500 max-w-4xl">
             <div>
                 <h1 className="text-2xl font-bold tracking-tight text-white">Platform Settings</h1>
-                <p className="text-slate-400">Manage your connected wallets and agent configurations.</p>
+                <p className="text-slate-400">
+                    {address
+                        ? `Connected: ${address.slice(0, 6)}...${address.slice(-4)} | Balance: ${isLoading ? '...' : balance?.displayValue} ${balance?.symbol}`
+                        : "Connect your wallet to manage agent configurations."
+                    }
+                </p>
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-4">

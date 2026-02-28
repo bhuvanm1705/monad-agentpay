@@ -1,13 +1,23 @@
+'use client';
+
 import { Activity, CreditCard, Users, ArrowRightLeft } from 'lucide-react';
+import { useContract, useContractRead } from '@thirdweb-dev/react';
 
 export default function Home() {
+  // Mock Contract Address - To be updated after actual deployment
+  const REGISTRY_CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000000";
+
+  // Web3 Hooks for Smart Contract Interaction
+  const { contract } = useContract(REGISTRY_CONTRACT_ADDRESS);
+  const { data: globalCallCount, isLoading: isCallsLoading } = useContractRead(contract, "globalCallCount");
+
+  // In a real app we'd fetch Total Agents via an array getter, mock here for UI
   const stats = [
     { name: 'Total Agents Registered', value: '142', icon: Users, change: '+12% from last week' },
     { name: '24h Transaction Volume', value: '45,231 MON', icon: Activity, change: '+4.5% from yesterday' },
-    { name: 'Active Payment Flows', value: '89', icon: ArrowRightLeft, change: '+22% from last week' },
+    { name: 'Active Payment Flows', value: globalCallCount ? globalCallCount.toString() : '...', icon: ArrowRightLeft, change: isCallsLoading ? 'Loading blockchain data...' : 'Live On-Chain Data' },
     { name: 'Total Value Locked', value: '$1.4M', icon: CreditCard, change: '+1% from yesterday' },
   ];
-
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       <div>
@@ -36,7 +46,7 @@ export default function Home() {
       </div>
 
       {/* Recent Activity Table (Simulated) */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-6">
+      < div className="rounded-xl border border-slate-800 bg-slate-900/50 p-6" >
         <h2 className="text-lg font-semibold text-white mb-4">Live Agent Activity</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm text-slate-400">
@@ -83,7 +93,7 @@ export default function Home() {
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
