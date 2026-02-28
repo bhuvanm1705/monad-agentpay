@@ -1,6 +1,5 @@
 'use client';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   ThirdwebProvider,
   coinbaseWallet,
@@ -28,30 +27,25 @@ const monadNetwork = {
   name: "Monad Mainnet",
 };
 
-const queryClient = new QueryClient();
-
 export default function Providers({ children }) {
   console.log("AgentPay Debug - ClientID Loaded:", process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThirdwebProvider
-        queryClient={queryClient}
-        activeChain={monadNetwork}
-        clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
-        supportedWallets={[
-          metamaskWallet(),
-          coinbaseWallet(),
-          walletConnect(),
-          rainbowWallet(),
-          zerionWallet(),
-          trustWallet(),
-          phantomWallet(),
-          localWallet(),
-        ]}
-      >
-        {children}
-      </ThirdwebProvider>
-    </QueryClientProvider>
+    <ThirdwebProvider
+      activeChain={monadNetwork}
+      clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
+      supportedWallets={[
+        metamaskWallet(),
+        coinbaseWallet(),
+        walletConnect(),
+        rainbowWallet(),
+        zerionWallet(),
+        trustWallet(),
+        phantomWallet(),
+        localWallet(),
+      ]}
+    >
+      {children}
+    </ThirdwebProvider>
   );
 }
