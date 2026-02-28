@@ -3,7 +3,6 @@
 import {
   ThirdwebProvider,
   coinbaseWallet,
-  embeddedWallet,
   localWallet,
   metamaskWallet,
   phantomWallet,
@@ -37,16 +36,6 @@ export default function Providers({ children }) {
       activeChain={monadNetwork}
       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
       supportedWallets={[
-        embeddedWallet({
-          auth: {
-            options: [
-              "email",
-              "google",
-              "apple",
-              "facebook",
-            ],
-          },
-        }),
         metamaskWallet(),
         coinbaseWallet(),
         walletConnect(),
